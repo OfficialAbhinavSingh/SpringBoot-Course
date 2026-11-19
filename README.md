@@ -7,6 +7,7 @@ Code and notes from the SST "Intro to Spring Boot" course. The course builds one
 | # | Date | Topic | Code | Notes |
 |---|------|-------|------|-------|
 | 1 | 30 Oct | Backend Foundations: Why Frameworks, Why Spring Boot? | theory only | [notes](notes/lecture-01-backend-foundations.md) |
+| 2 | 3 Nov | REST APIs and Developer Profiles | project setup, `/health`, `/api/v1/status`, `Developer` model | [notes](notes/lecture-02-rest-apis-and-developer-profiles.md) |
 
 ## Run
 

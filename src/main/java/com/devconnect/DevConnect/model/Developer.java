@@ -8,6 +8,7 @@ public class Developer {
     private Long id;
     private String name;
     private String email;
+    private String phoneNumber;
     private String bio;
     private String city;
     private List<String> skills;
@@ -18,6 +19,7 @@ public class Developer {
 
 
     public Developer() {
+        this.skills = new ArrayList<>();
         createdAt = LocalDateTime.now();
     }
 
@@ -54,6 +56,14 @@ public class Developer {
         this.email = email;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getBio() {
         return bio;
     }
@@ -66,11 +76,11 @@ public class Developer {
         return skills;
     }
 
-    // Is this method safe?
+    // Lecture 2 asked "Is this method safe?" - it was not: it only assigned when the
+    // list was null, so skills sent in a JSON body were silently dropped.
+    // Now: never store null, and copy the list so callers can't change it from outside.
     public void setSkills(List<String> skills) {
-        if (skills == null) {
-            this.skills = skills;
-        }
+        this.skills = (skills == null) ? new ArrayList<>() : new ArrayList<>(skills);
     }
 
     public void addSkill(String skill) {
@@ -82,10 +92,12 @@ public class Developer {
 
     public void addSkills(List<String> skills) {
         if (skills == null) {
-            this.skills = skills;
-        } else {
-            this.skills.addAll(skills);
+            return;
         }
+        if (this.skills == null) {
+            this.skills = new ArrayList<>();
+        }
+        this.skills.addAll(skills);
     }
 
     public String getLinkedInURL() {

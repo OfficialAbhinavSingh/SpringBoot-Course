@@ -20,6 +20,17 @@ public class DeveloperController {
     private final Map<Long, Developer> developerStore = new ConcurrentHashMap<>();
     private final AtomicLong idCounter = new AtomicLong(1);
 
+    // GET /api/v1/developers
+    // Jackson turns the List<Developer> into a JSON array automatically.
+    @GetMapping
+    public List<Developer> getDevelopers() {
+        List<Developer> developers = new ArrayList<>();
+        developers.add(new Developer(1L, "Riya", "riya@test.com"));
+        developers.add(new Developer(2L, "Aman", "aman@test.com"));
+        developers.add(new Developer(3L, "Sara", "sara@test.com"));
+        return developers;
+    }
+
     @GetMapping("/{id}")
     public Developer getDeveloperById(@PathVariable Long id) {
         return new Developer();
